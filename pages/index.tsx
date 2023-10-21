@@ -174,7 +174,7 @@ const Home: NextPage = () => {
         <title>DERANGED</title>
       </Head>
       <ToastContainer />
-      
+
       <div className="flex flex-col gap-16">
         <div className="relative grid h-full gap-10 p-4 pt-20 pb-32 my-auto overflow-hidden xl:px-8 xs:grid-cols-1">
           <div className="z-10 flex flex-col gap-6">
@@ -215,7 +215,7 @@ const Home: NextPage = () => {
       <button className="flex items-center gap-2 p-1 px-5 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-blue-700 via-blue-400 to-blue-300 rounded-md"
         style={{ backgroundColor: '#c46603', borderRadius: '0.6rem' }} onClick={openTokenInfoPopup}>Info</button>
       {showTokenInfoPopup && <TokenInfoPopup walletAddress={contractAddressfree} closePopup={closeTokenInfoPopup} />}
-      
+
     </div>
     <div className="flex flex-col gap-16">
       {/* ClaimTokens Notification */}
@@ -241,9 +241,8 @@ const Home: NextPage = () => {
         />
       </div>
     </div>
-    
-    
-  </div>
+
+</div>
 </div>
 
             <div className="flex flex-col gap-1">
@@ -329,8 +328,8 @@ const Home: NextPage = () => {
 
           <div className="relative flex flex-col items-center justify-center gap-2">
             <div className="relative">
-              
-            </div>
+
+</div>
 
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] mx-auto my-auto rounded-full bg-gradient-radial from-orange-600/10 via-transparent" />
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] mx-auto my-auto rounded-full bg-gradient-radial from-orange-600/40 via-transparent" />
