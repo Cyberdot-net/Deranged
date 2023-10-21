@@ -4,8 +4,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 const TokenInfoPopup2 = ({ walletAddress, contractAddress, closePopup }) => {
-  const [tokenBalance, setTokenBalance] = useState('0');
-  const [transactionCount, setTransactionCount] = useState(0);
+  const [setTokenBalance] = useState('0');
+  const [setTransactionCount] = useState(0);
   const [ethBalance, setEthBalance] = useState('0');
 
   const formatNumber = (number) => {
@@ -17,7 +17,7 @@ const TokenInfoPopup2 = ({ walletAddress, contractAddress, closePopup }) => {
   };
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData () {
       try {
         const provider = new ethers.providers.JsonRpcProvider(
           'https://eth-sepolia.g.alchemy.com/v2/Hsxe3B-XTEp2o3QNI2LxIFYFaAf3cy0T'
@@ -78,10 +78,6 @@ const TokenInfoPopup2 = ({ walletAddress, contractAddress, closePopup }) => {
 
     fetchData();
   }, [walletAddress, contractAddress]);
-
-
-
-
 
   return (
     <div className="popup-container">

@@ -71,7 +71,7 @@ const Home: NextPage = () => {
   const targetDate2 = '2023-10-24T16:00:00'; // Replace with your specific date and time
   const contractAddressfree = '0x03E071D664FA812094e15026668C73DDfbB8A99d'; // Replace with the actual contract address
   const contractAddresspremium = '0x42Fda2eC03a664489Bf7D2C19b199d8287F3fB29';
-  
+
   const handleClaimAirdrop = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
