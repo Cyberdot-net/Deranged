@@ -174,57 +174,78 @@ const Home: NextPage = () => {
         <title>DERANGED</title>
       </Head>
       <ToastContainer />
+      
       <div className="flex flex-col gap-16">
-        <div className="relative grid h-full grid-cols-2 gap-10 p-4 pt-20 pb-32 my-auto overflow-hidden xl:px-8 xs:grid-cols-1">
+        <div className="relative grid h-full gap-10 p-4 pt-20 pb-32 my-auto overflow-hidden xl:px-8 xs:grid-cols-1">
           <div className="z-10 flex flex-col gap-6">
-            <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-2 px-4 rounded-full text-neutral-200 max-w-max">
-              </div>
+          <div className="shadowed-box">
+  <div className="box-content">
+    <div className="flex items-center justify-between"> {/* Use flex and justify-between */}
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center gap-2 px-4 rounded-full text-neutral-200 max-w-max">
+        </div>
 
-              <h1 className="flex flex-col gap-3 font-semibold text-7xl sm:text-6xl xs:text-6xl">
-                <span className="text-white text-6xl">Embrace the chaos!</span>
-                <span className="text-white text-2xl">This is the place where crypto&apos;s madness <br></br>thrives, and only the deranged survive.
-                </span>
-              </h1>
-              <p className="text-gray-100">
-                Claim your share of the crypto madness right here <br /> and prepare to plunge into the depths of chaos!
-              </p>
-              <div></div>
-            </div>
-            <div className=""><WalletStatus /></div>
-            <div className="flex items-center gap-2">
-              <button
-                className="flex items-center gap-2 p-4 px-8 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-yellow-700 via-yellow-400 to-yellow-300 rounded-md"
-                style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
-                // onClick={handleClaimAirdrop}
-                onClick={address === undefined ? openConnectModal : handleClaimAirdrop}
-              >
-                <span className="font-semibold" style={{ color: 'rgb(45, 34, 70)' }}>Claim</span>
-                {/* Add your loading and arrow icons here */}
-              </button>
+        <h1 className="flex flex-col gap-3 font-semibold text-7xl sm:text-6xl xs:text-6xl">
+          <span className="text-white text-6xl">Embrace the chaos!</span>
+          <span className="text-white text-2xl">This is the place where crypto&apos;s madness <br /> thrives, and only the deranged survive.</span>
+        </h1>
+        <p className="text-gray-100">
+          Claim your share of the crypto madness right here <br /> and prepare to plunge into the depths of chaos!
+        </p>
+        <div>
+        <div className="" style={{ marginBottom: '20px' }}>
+        <WalletStatus /></div>
+        <div className="flex items-center gap-2 mb-3">
+      <button
+        className="flex items-center gap-2 p-4 px-8 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-yellow-700 via-yellow-400 to-yellow-300 rounded-md"
+        style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
+        // onClick={handleClaimAirdrop}
+        onClick={address === undefined ? openConnectModal : handleClaimAirdrop}
+      >
+        <span className="font-semibold" style={{ color: 'rgb(45, 34, 70)' }}>Claim</span>
+        {/* Add your loading and arrow icons here */}
+      </button>
 
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
-                <div>Time Remaining</div>
-                <CountdownTimer targetDate={targetDate} textColor="white" />
-              </div>
-            </div>
-            <div>
-              <button className="flex items-center gap-2 p-1 px-5 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-blue-700 via-blue-400 to-blue-300 rounded-md"
-                style={{ backgroundColor: '#c46603', borderRadius: '0.6rem' }} onClick={openTokenInfoPopup}>Info</button>
-              {showTokenInfoPopup && <TokenInfoPopup walletAddress={contractAddressfree} closePopup={closeTokenInfoPopup} />}
-            </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
+        <div>Time Remaining</div>
+        <CountdownTimer targetDate={targetDate} textColor="white" />
+      </div>
+    </div>
+    <div>
+      <button className="flex items-center gap-2 p-1 px-5 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-blue-700 via-blue-400 to-blue-300 rounded-md"
+        style={{ backgroundColor: '#c46603', borderRadius: '0.6rem' }} onClick={openTokenInfoPopup}>Info</button>
+      {showTokenInfoPopup && <TokenInfoPopup walletAddress={contractAddressfree} closePopup={closeTokenInfoPopup} />}
+      
+    </div>
+    <div className="flex flex-col gap-16">
+      {/* ClaimTokens Notification */}
+      {claimNotification && (
+        <div className={claimNotification.includes('Transaction failed') ? errorNotificationClass : successNotificationClass}>
+          {claimNotification}
+        </div>
+      )}
+    </div>
+        </div>
+      </div>
+      <div className="ml-[-0px]">
+        <Image
+          className={` ${isMobile ? 'ml-auto' : ''}`}
+          src="/images/Parachute_02.png"
+          alt="Description of the image" // Add a meaningful description here
+          width={isMobile ? 288 : 550}
+          height={isMobile ? 330 : 550}
+          style={{
+            width: isMobile ? 'auto' : '100%',
+            height: isMobile ? 'auto' : '100%'
+          }}
+        />
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
 
-            <div className="flex flex-col gap-16">
-
-              {/* ClaimTokens Notification */}
-              {claimNotification && (
-                <div className={claimNotification.includes('Transaction failed') ? errorNotificationClass : successNotificationClass}>
-                  {claimNotification}
-                </div>
-              )}
-
-              {/* ... */}
-            </div>
             <div className="flex flex-col gap-1">
               <div className="flex flex-col gap-6 font-semibold text-1xl sm:text-1xl xs:text-1xl">
               <div className="shadowed-box">
@@ -308,31 +329,16 @@ const Home: NextPage = () => {
 
           <div className="relative flex flex-col items-center justify-center gap-2">
             <div className="relative">
-              <div className="ml-[-0px]">
-                <Image
-                  className={` ${isMobile ? 'ml-auto' : ''}`}
-                  src="/images/Parachute_02.png"
-                  alt="Description of the image" // Add a meaningful description here
-                  width={isMobile ? 288 : 550}
-                  height={isMobile ? 330 : 550}
-                  style={{
-                    width: isMobile ? 'auto' : '100%',
-                    height: isMobile ? 'auto' : '100%'
-                  }}
-                />
-              </div>
+              
             </div>
-            <div className="bg-gray-800 bg-opacity-0 p-2 rounded-md custom-border" style={{ maxWidth: '295px' }}>
-              <p className="text-xs text-gray-300">1 $DERANGED = 0.000000045015846 ETH</p>
-              <p className="text-xs text-gray-300">1 ETH = 22,214,399.79157562 $DERANGED</p>
-            </div>
+
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] mx-auto my-auto rounded-full bg-gradient-radial from-orange-600/10 via-transparent" />
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] mx-auto my-auto rounded-full bg-gradient-radial from-orange-600/40 via-transparent" />
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] mx-auto my-auto rounded-full bg-gradient-radial from-orange-600/70 via-transparent" />
           </div>
         </div>
-        <TokenomicsSection />
       </div>
+      <TokenomicsSection />
     </>
   );
 };
