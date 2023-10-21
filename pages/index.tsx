@@ -8,7 +8,6 @@ import YourContract2ABI from "./abi2.json";
 import Image from "next/image";
 import CountdownTimer from '../components/Countdown/CountdownTimer';
 import TokenInfoPopup from './TokenInfoPopup';
-import TokenInfoPopup2 from './TokenInfoPopup2';
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi"
 import { ethers } from "ethers"
@@ -16,6 +15,28 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const Home: NextPage = () => {
+  const [ethBalance, setEthBalance] = useState('0');
+
+  useEffect(() => {
+    async function fetchData () {
+      try {
+        const provider = new ethers.providers.JsonRpcProvider(
+          'https://eth-sepolia.g.alchemy.com/v2/Hsxe3B-XTEp2o3QNI2LxIFYFaAf3cy0T'
+        );
+
+        // Fetch the ETH balance of the contract
+        const ethBalance = await provider.getBalance(contractAddresspremium);
+        const formattedEthBalance = ethers.utils.formatEther(ethBalance);
+
+        setEthBalance(formattedEthBalance);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [claimNotification, setClaimNotification] = useState<string | null>(null);
   const [swapNotification, setSwapNotification] = useState<string | null>(null);
@@ -25,7 +46,6 @@ const Home: NextPage = () => {
   const successNotificationClass = 'success-notification';
   const [showClaimPopup, setShowClaimPopup] = useState(false);
   const [showTokenInfoPopup, setShowTokenInfoPopup] = useState(false);
-  const [showTokenInfoPopup2, setShowTokenInfoPopup2] = useState(false);
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount()
   console.log(address)
@@ -37,16 +57,6 @@ const Home: NextPage = () => {
   // Function to close the popup 1
   const closeTokenInfoPopup = () => {
     setShowTokenInfoPopup(false);
-  };
-
-  // Function to open the popup 2
-  const openTokenInfoPopup2 = () => {
-    setShowTokenInfoPopup2(true);
-  };
-
-  // Function to close the popup 2
-  const closeTokenInfoPopup2 = () => {
-    setShowTokenInfoPopup2(false);
   };
 
   const showClaimSuccessPopup = () => {
@@ -281,63 +291,60 @@ const Home: NextPage = () => {
           height: isMobile ? 'auto' : '100%'
         }}
       />
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+<div className="popup-container">
+    <div className="popup-content" style={{ width: '150%', marginTop: '10px' }}>
+        <p>ETH</p>
+        <p>{ethBalance}</p>
+    </div>
+</div>
+    </div>
     </div>
     <div className="text-content">
     <p className="text-6xl text-white text-right">
   Stoke the flames of madness!
 </p>
+<h1 className="flex flex-col gap-3 font-semibold text-7xl sm:text-6xl xs:text-6xl text-right">
 
-      <p className="text-gray-300 sm:text-6xl xs:text-6xl text-right text-2xl" style={{ marginBottom: '50px', marginTop: '20px' }}>
+<span className="text-gray-300 text-2xl mt-3">
       Generous tips create a grand spectacle, merging<br></br> all funds into the liquidity pool.
-      </p>
-      <p className="text-gray-300 sm:text-6xl xs:text-6xl text-center text-1xl" style={{ marginBottom: '20px', marginTop: '20px' }}>
-      Join the show and tip your way<br></br> to the deranged stratosphere.
-      </p>
-      <div className="flex items-center justify-center mt-3 mb-3">
-        <div className="bg-gray-800 bg-opacity-0 p-3 rounded-md custom-border" style={{ maxWidth: '295px', textAlign: 'center' }}>
-          <p className="text-xs text-gray-300">1 $DERANGED = 0.000000045015846 ETH</p>
-          <p className="text-xs text-gray-300">1 ETH = 22,214,399.79157562 $DERANGED</p>
-        </div>
-      </div>
-      <div className="flex items-center justify-center mt-3 mb-3">
-      <input
-  type="number"
-  placeholder="Enter ETH amount"
-  value={ethAmount}
-  onChange={(e) => setEthAmount(e.target.value)}
-  className="p-2 rounded-md mr-2"
-  style={{ color: 'black' }}
-/>
-        <button
-          className="flex items-center gap-2 p-4 px-6 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-green-700 via-green-400 to-green-300 rounded-md"
-          style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
-          onClick={address === null ? openConnectModal : handleSwapEthForTokens}
-        >
-          <span className="font-semibold" style={{ color: 'rgb(45, 34, 70)' }}>Premium</span>
-          {/* Add a loading indicator if needed */}
-        </button>
-      </div>
-      <div>
-  <button
-    className="flex items-center gap-2 p-1 px-5 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-blue-700 via-blue-400 to-blue-300 rounded-md"
-    style={{ backgroundColor: '#c46603', borderRadius: '0.6rem' }}
-    onClick={openTokenInfoPopup2}
-  >
-    Info
-  </button>
-  {showTokenInfoPopup2 && address && (
-  <TokenInfoPopup2
+      </span>
+      </h1>
+      <div className="right-content">
+      <p className="text-gray-300 text-right mt-12">
+    Join the show and tip your way to the deranged stratosphere.
+  </p>
+  <div className="flex items-end justify-end mt-3 mb-3">
+    <div className="bg-gray-800 bg-opacity-0 p-3 rounded-md custom-border" style={{ maxWidth: '295px', textAlign: 'center' }}>
+      <p className="text-xs text-gray-300">1 $DERANGED = 0.000000045015846 ETH</p>
+      <p className="text-xs text-gray-300">1 ETH = 22,214,399.79157562 $DERANGED</p>
+    </div>
+  </div>
+  <div className="flex items-center justify-end mt-3 mb-3">
+    <input
+      type="number"
+      placeholder="Enter ETH amount"
+      value={ethAmount}
+      onChange={(e) => setEthAmount(e.target.value)}
+      className="p-2 rounded-md mr-2"
+      style={{ color: 'black' }}
+    />
+    <button
+      className="flex items-center gap-2 p-4 px-6 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-green-700 via-green-400 to-green-300 rounded-md"
+      style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
+      onClick={address === null ? openConnectModal : handleSwapEthForTokens}
+    >
+      <span className="font-semibold" style={{ color: 'rgb(45, 34, 70)' }}>Premium</span>
+      {/* Add a loading indicator if needed */}
+    </button>
+  </div>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end', color: 'text-gray-300' }}>
+    <div>Time Remaining</div>
+    <CountdownTimer targetDate={targetDate2} textColor="white" />
+  </div>
 
-    contractAddress={contractAddresspremium} // Use the contract address
-    closePopup={closeTokenInfoPopup2}
-  />
-)}
 </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
-        <div>Time Remaining</div>
-        <CountdownTimer targetDate={targetDate2} textColor="white" />
-      </div>
     </div>
   </div>
 </div>
