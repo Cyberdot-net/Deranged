@@ -81,7 +81,7 @@ const TokenInfoPopup = ({ walletAddress, closePopup }) => {
 
   return (
     <div className="popup-container">
-      <div className="popup-content" style={{ width: '60%' }}>
+      <div className="popup-content" style={{ width: '80%', marginTop: '10px' }}>
         <p>Remaining: {tokenBalance} $DERANGED</p>
         <p>Total Transactions: {transactionCount}</p>
         <button

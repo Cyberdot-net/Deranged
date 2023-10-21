@@ -325,13 +325,13 @@ const Home: NextPage = () => {
   >
     Info
   </button>
-  {showTokenInfoPopup2 && (
-    <TokenInfoPopup2
-      walletAddress={contractAddresspremium}
-      contractAddress={contractAddresspremium}
-      closePopup={closeTokenInfoPopup2}
-    />
-  )}
+  {showTokenInfoPopup2 && address && (
+  <TokenInfoPopup2
+
+    contractAddress={contractAddresspremium} // Use the contract address
+    closePopup={closeTokenInfoPopup2}
+  />
+)}
 </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
