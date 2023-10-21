@@ -75,3 +75,49 @@ a {
 }
 
 /* styles.css */
+
+
+/* CSS for the shadowed box with rounded edges */
+.shadowed-box {
+  background-color: #140725; /* Background color */
+  border-radius: 20px; /* Adjust the border radius for rounded edges */
+  padding: 20px; /* Adjust the padding as needed */
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4); /* Box shadow for the shadow effect */
+  color: #fff; /* Text color */
+}
+
+/* CSS for the content inside the shadowed box */
+.box-content {
+  text-align: center; /* Center the text horizontally */
+  font-size: 16px; /* Adjust the font size as needed */
+}
+
+/* Style for the premium button */
+.premium-button {
+  background-color: #c46603;
+  color: #2d2246;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Countdown timer style (adjust as needed) */
+.countdown {
+  color: #fff;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+/* Text style for "Stoke the flame the enter ETH" */
+.text-stoke-flame {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Text style for "premium button and his countdown" */
+.text-premium-countdown {
+  font-size: 16px;
+  margin-bottom: 10px;
+}

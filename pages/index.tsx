@@ -227,36 +227,45 @@ const Home: NextPage = () => {
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex flex-col gap-6 font-semibold text-1xl sm:text-1xl xs:text-1xl">
-                <p className="text-gray-300">Stoke the flames of madness! Generous tips set the<br></br> stage for a grand spectacle, with all funds merging<br></br> into the liquidity pool in a truly deranged fashion.<br></br> Be a part of the show and tip your way to the<br></br> deranged stratosphere!</p>
+              <div className="shadowed-box">
+  <div className="box-content">
+    <p className="text-4xl text-white">
+        Stoke the flames of madness!
+      </p>
+      <p className="text-gray-300" style={{ marginTop: '20px' }}>
+      Generous tips set the<br /> stage for a grand spectacle, with all funds merging<br /> into the liquidity pool in a truly deranged fashion.<br /> Be a part of the show and tip your way to the<br /> deranged stratosphere.
+    </p>
+    <div className="flex items-center justify-center mt-3 mb-3">
+      <div className="bg-gray-800 bg-opacity-0 p-3 rounded-md custom-border" style={{ maxWidth: '295px', textAlign: 'center' }}>
+        <p className="text-xs text-gray-300">1 $DERANGED = 0.000000045015846 ETH</p>
+        <p className="text-xs text-gray-300">1 ETH = 22,214,399.79157562 $DERANGED</p>
+      </div>
+    </div>
+    <div className="flex items-center justify-center mt-3 mb-3">
+  <input
+    type="number"
+    placeholder="Enter ETH amount"
+    value={ethAmount}
+    onChange={(e) => setEthAmount(e.target.value)}
+    className="p-2 rounded-md mr-2"
+  />
 
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                placeholder="Enter ETH amount"
-                value={ethAmount}
-                onChange={(e) => setEthAmount(e.target.value)}
-                className="p-2 rounded-md"
-              />
-
-              <div className="flex items-center gap-2">
-                <button
-                  className="flex items-center gap-2 p-4 px-6 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-green-700 via-green-400 to-green-300 rounded-md"
-                  style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
-                  // onClick={handleSwapEthForTokens}
-                  onClick={address == null ? openConnectModal : handleSwapEthForTokens}
-                >
-                  <span className="font-semibold" style={{ color: 'rgb(45, 34, 70)' }}>Premium</span>
-                  {/* Add loading indicator if needed */}
-                </button>
-
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
-                  <div>Time Remaining</div>
-                  <CountdownTimer targetDate={targetDate2} textColor="white" />
-                </div>
-              </div>
+  <button
+    className="flex items-center gap-2 p-4 px-6 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-green-700 via-green-400 to-green-300 rounded-md"
+    style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
+    onClick={address === null ? openConnectModal : handleSwapEthForTokens}
+  >
+    <span className="font-semibold" style={{ color: 'rgb(45, 34, 70)' }}>Premium</span>
+    {/* Add a loading indicator if needed */}
+  </button>
+</div>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
+      <div>Time Remaining</div>
+      <CountdownTimer targetDate={targetDate2} textColor="white" />
+    </div>
+  </div>
+</div>
+</div>
               <div className="parent-container">
 
                 {showClaimPopup && (
