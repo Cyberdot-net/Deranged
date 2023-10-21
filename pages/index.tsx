@@ -285,13 +285,14 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="flex items-center justify-center mt-3 mb-3">
-        <input
-          type="number"
-          placeholder="Enter ETH amount"
-          value={ethAmount}
-          onChange={(e) => setEthAmount(e.target.value)}
-          className="p-2 rounded-md mr-2"
-        />
+      <input
+  type="number"
+  placeholder="Enter ETH amount"
+  value={ethAmount}
+  onChange={(e) => setEthAmount(e.target.value)}
+  className="p-2 rounded-md mr-2"
+  style={{ color: 'black' }}
+/>
         <button
           className="flex items-center gap-2 p-4 px-6 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-green-700 via-green-400 to-green-300 rounded-md"
           style={{ backgroundColor: '#c46603', borderRadius: '1rem' }}
