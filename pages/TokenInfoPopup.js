@@ -81,22 +81,10 @@ const TokenInfoPopup = ({ walletAddress, closePopup }) => {
 
   return (
     <div className="popup-container">
-      <div className="popup-content" style={{ width: '80%', marginTop: '10px' }}>
+      <div className="popup-content" style={{ width: '60%' }}>
         <p>Remaining: {tokenBalance} $DERANGED</p>
         <p>Total Transactions: {transactionCount}</p>
-        <button
-      style={{
-        background: 'linear-gradient(to top, #0072c1, #4e92ca, #8cb1d4)',
-        borderRadius: '0.6rem',
-        color: 'white',
-        padding: '0.3rem 1rem',
-        cursor: 'pointer',
-        marginTop: '10px' // Add margin-top here
-      }}
-      onClick={closePopup}
-    >
-      Close
-    </button>
+        <button onClick={closePopup}>Close</button>
       </div>
     </div>
   );
