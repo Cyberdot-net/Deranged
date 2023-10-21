@@ -1,26 +1,24 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types';
 
-const TokenInfoPopup = ({ walletAddress, closePopup }) => {
+const TokenInfoPopup2 = ({ walletAddress, contractAddress, closePopup }) => {
   const [tokenBalance, setTokenBalance] = useState('0');
   const [transactionCount, setTransactionCount] = useState(0);
+  const [ethBalance, setEthBalance] = useState('0');
 
-  // Function to format a number by adding commas
   const formatNumber = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // Function to truncate the last 18 digits
   const truncateBalance = (balance) => {
     return balance.slice(0, -24);
   };
 
   useEffect(() => {
-    async function fetchData () {
+    async function fetchData() {
       try {
-        // Initialize an ethers.js provider
         const provider = new ethers.providers.JsonRpcProvider(
           'https://eth-sepolia.g.alchemy.com/v2/Hsxe3B-XTEp2o3QNI2LxIFYFaAf3cy0T'
         );
@@ -36,18 +34,15 @@ const TokenInfoPopup = ({ walletAddress, closePopup }) => {
         );
 
         // Fetch the token balance for the wallet
-        const balance = await tokenContract.balanceOf(walletAddress);
+        const tokenBalance = await tokenContract.balanceOf(walletAddress);
 
-        // Format the token balance by removing decimals and adding commas
-        const formattedBalance = formatNumber(
-          ethers.utils.formatUnits(balance, 0)
-        ); // Assuming 0 decimal places
+        const formattedTokenBalance = formatNumber(
+          ethers.utils.formatUnits(tokenBalance, 0)
+        );
 
-        // Truncate the last 18 digits
-        const truncatedBalance = truncateBalance(formattedBalance);
+        const truncatedTokenBalance = truncateBalance(formattedTokenBalance);
 
-        // Set the truncated token balance
-        setTokenBalance(truncatedBalance);
+        setTokenBalance(truncatedTokenBalance);
 
         // Fetch transaction count from Etherscan
         const etherscanApiKey = '5E3S3P9U3XR432TSVUJQN7T79Q4KFNXS88';
@@ -69,22 +64,31 @@ const TokenInfoPopup = ({ walletAddress, closePopup }) => {
         const transactionData = response.data.result;
         const count = transactionData.length;
 
-        // Set the transaction count
         setTransactionCount(count);
+
+        // Fetch the ETH balance of the contract
+        const ethBalance = await provider.getBalance(contractAddress);
+        const formattedEthBalance = ethers.utils.formatEther(ethBalance);
+
+        setEthBalance(formattedEthBalance);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
     fetchData();
-  }, [walletAddress]);
+  }, [walletAddress, contractAddress]);
+
+
+
+
 
   return (
     <div className="popup-container">
-      <div className="popup-content" style={{ width: '60%' }}>
-        <p>Remaining: {tokenBalance} $DERANGED</p>
-        <p>Total Transactions: {transactionCount}</p>
-        <button
+  <div className="popup-content" style={{ width: '60%' }}>
+    <p>ETH</p>
+    <p>{ethBalance}</p>
+    <button
       style={{
         background: 'linear-gradient(to top, #0072c1, #4e92ca, #8cb1d4)',
         borderRadius: '0.6rem',
@@ -97,15 +101,16 @@ const TokenInfoPopup = ({ walletAddress, closePopup }) => {
     >
       Close
     </button>
-      </div>
-    </div>
+  </div>
+</div>
+
   );
 };
 
-// Add prop type validation
-TokenInfoPopup.propTypes = {
+TokenInfoPopup2.propTypes = {
   walletAddress: PropTypes.string.isRequired,
+  contractAddress: PropTypes.string.isRequired,
   closePopup: PropTypes.func.isRequired
 };
 
-export default TokenInfoPopup;
+export default TokenInfoPopup2;

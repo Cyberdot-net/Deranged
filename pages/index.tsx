@@ -8,6 +8,7 @@ import YourContract2ABI from "./abi2.json";
 import Image from "next/image";
 import CountdownTimer from '../components/Countdown/CountdownTimer';
 import TokenInfoPopup from './TokenInfoPopup';
+import TokenInfoPopup2 from './TokenInfoPopup2';
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi"
 import { ethers } from "ethers"
@@ -24,17 +25,28 @@ const Home: NextPage = () => {
   const successNotificationClass = 'success-notification';
   const [showClaimPopup, setShowClaimPopup] = useState(false);
   const [showTokenInfoPopup, setShowTokenInfoPopup] = useState(false);
+  const [showTokenInfoPopup2, setShowTokenInfoPopup2] = useState(false);
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount()
   console.log(address)
-  // Function to open the popup
+  // Function to open the popup 1
   const openTokenInfoPopup = () => {
     setShowTokenInfoPopup(true);
   };
 
-  // Function to close the popup
+  // Function to close the popup 1
   const closeTokenInfoPopup = () => {
     setShowTokenInfoPopup(false);
+  };
+
+  // Function to open the popup 2
+  const openTokenInfoPopup2 = () => {
+    setShowTokenInfoPopup2(true);
+  };
+
+  // Function to close the popup 2
+  const closeTokenInfoPopup2 = () => {
+    setShowTokenInfoPopup2(false);
   };
 
   const showClaimSuccessPopup = () => {
@@ -58,7 +70,8 @@ const Home: NextPage = () => {
   const targetDate = '2023-10-23T16:00:00'; // Replace with your specific date and time
   const targetDate2 = '2023-10-24T16:00:00'; // Replace with your specific date and time
   const contractAddressfree = '0x03E071D664FA812094e15026668C73DDfbB8A99d'; // Replace with the actual contract address
-
+  const contractAddresspremium = '0x42Fda2eC03a664489Bf7D2C19b199d8287F3fB29';
+  
   const handleClaimAirdrop = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -188,9 +201,9 @@ const Home: NextPage = () => {
 
         <h1 className="flex flex-col gap-3 font-semibold text-7xl sm:text-6xl xs:text-6xl text-left">
   <span className="text-white text-6xl">Embrace the chaos!</span>
-  <span className="text-white text-2xl">This is the place where crypto&apos;s madness <br /> thrives, and only the deranged survive.</span>
+  <span className="text-gray-300 text-2xl">This is the place where crypto&apos;s madness <br /> thrives, and only the deranged survive.</span>
 </h1>
-<p className="text-gray-100 text-left">
+<p className="text-gray-300 text-left">
   Claim your share of the crypto madness right here <br /> and prepare to plunge into the depths of chaos!
 </p>
 
@@ -237,8 +250,8 @@ const Home: NextPage = () => {
     width={isMobile ? 288 : 550}
     height={isMobile ? 330 : 550}
     style={{
-      width: isMobile ? 'auto' : '100%',
-      height: isMobile ? 'auto' : '100%'
+      width: isMobile ? 'auto' : '95%',
+      height: isMobile ? 'auto' : '95%'
     }}
   />
   <div className="centered-backgrounds">
@@ -275,9 +288,11 @@ const Home: NextPage = () => {
 </p>
 
       <p className="text-gray-300 sm:text-6xl xs:text-6xl text-right text-2xl" style={{ marginBottom: '50px', marginTop: '20px' }}>
-        Generous tips set the stage for a grand <br></br>spectacle, with all funds merging into<br></br> the liquidity pool in a truly deranged fashion.
+      Generous tips create a grand spectacle, merging<br></br> all funds into the liquidity pool.
       </p>
-
+      <p className="text-gray-300 sm:text-6xl xs:text-6xl text-center text-1xl" style={{ marginBottom: '20px', marginTop: '20px' }}>
+      Join the show and tip your way<br></br> to the deranged stratosphere.
+      </p>
       <div className="flex items-center justify-center mt-3 mb-3">
         <div className="bg-gray-800 bg-opacity-0 p-3 rounded-md custom-border" style={{ maxWidth: '295px', textAlign: 'center' }}>
           <p className="text-xs text-gray-300">1 $DERANGED = 0.000000045015846 ETH</p>
@@ -302,6 +317,23 @@ const Home: NextPage = () => {
           {/* Add a loading indicator if needed */}
         </button>
       </div>
+      <div>
+  <button
+    className="flex items-center gap-2 p-1 px-5 transition-all max-w-max hover:scale-105 bg-gradient-to-t from-blue-700 via-blue-400 to-blue-300 rounded-md"
+    style={{ backgroundColor: '#c46603', borderRadius: '0.6rem' }}
+    onClick={openTokenInfoPopup2}
+  >
+    Info
+  </button>
+  {showTokenInfoPopup2 && (
+    <TokenInfoPopup2
+      walletAddress={contractAddresspremium}
+      contractAddress={contractAddresspremium}
+      closePopup={closeTokenInfoPopup2}
+    />
+  )}
+</div>
+
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white' }}>
         <div>Time Remaining</div>
         <CountdownTimer targetDate={targetDate2} textColor="white" />
